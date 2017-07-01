@@ -1,0 +1,105 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>Docker Registry Management</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+
+  <link href="http://cdn.jsdelivr.net/webjars/bootstrap/3.3.7/css/bootstrap.min.css"
+        th:href="@{/webjars/bootstrap/3.3.7/css/bootstrap.min.css}"
+        rel="stylesheet" media="screen"/>
+
+  <script src="http://cdn.jsdelivr.net/webjars/jquery/3.2.0/jquery.min.js"
+          th:src="@{/webjars/jquery/3.2.0/jquery.min.js}"></script>
+
+  <link rel="stylesheet" th:href="@{/css/main.css}"
+        href="../../css/main.css"/>
+
+</head>
+<body>
+
+<nav class="navbar navbar-inverse">
+  <div class="container">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="#">Docker Registry Manager</a>
+    </div>
+    <div id="navbar" class="collapse navbar-collapse">
+      <ul class="nav navbar-nav">
+        <li class="active"><a href="#">Dashboard</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<div class="container">
+  <div class="row">
+    <div class="col-xs-6 col-md-4">
+      <div class="list-group" th:each="dockerRegistry : ${dockerRegistries}">
+        <a href="#" class="list-group-item disabled">Registry list:</a>
+        <a href="#" class="list-group-item">
+          <span class="badge">${dockerRegistry.imagesCount}</span>
+          <h4 class="list-group-item-heading">${dockerRegistry.name}</h4>
+        </a>
+        <div class="panel-footer">
+          <form class="form-horizontal">
+            <div class="form-group">
+              <label for="newRegistryUrl" class="col-sm-2 control-label">URL:</label>
+              <div class="col-sm-10">
+                <input type="url" class="form-control" id="newRegistryUrl" placeholder="www.example.com:5000">
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="newRegistryDesc" class="col-sm-2 control-label">Password</label>
+              <div class="col-sm-10">
+                <input type="text" class="form-control" id="newRegistryDesc" placeholder="Shot description">
+              </div>
+            </div>
+            <div class="form-group">
+              <div class="col-sm-offset-2 col-sm-10">
+                <button type="submit" class="btn btn-default">Add registry</button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-xs-12 col-md-8">
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h3>Docker images</h3>
+          <p class="list-group-item-text"><strong>Location:</strong> http:/example.com:5000-v1</p>
+          <p class="list-group-item-text"><strong>Description:</strong> Lorem ipsum dolor sit amet,
+            consectetur adipiscing elit. Nulla eros dolor, blandit sed orci id.</p>
+        </div>
+        <table class="table">
+          <thead>
+          <tr>
+            <th>Name</th>
+            <th>Tag</th>
+            <th>Last update</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr>
+            <td>Test image 1</td>
+            <td>Test image 1</td>
+            <td>MM-DD-YYYY</td>
+          </tr>
+          <tr>
+            <td>Test image 2</td>
+            <td>Test image 2</td>
+            <td>MM-DD-YYYY</td>
+          </tr>
+          <tr>
+            <td>Test image 3</td>
+            <td>Test image 3</td>
+            <td>MM-DD-YYYY</td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+</html>
