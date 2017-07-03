@@ -11,6 +11,9 @@
   <script src="http://cdn.jsdelivr.net/webjars/jquery/3.2.0/jquery.min.js"
           th:src="@{/webjars/jquery/3.2.0/jquery.min.js}"></script>
 
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+          th::src="@{/webjars/jquery/3.3.7/js/bootstrap.min.js}"></script>
+
   <link rel="stylesheet" th:href="@{/css/main.css}"
         href="../../css/main.css"/>
 
@@ -30,36 +33,34 @@
   </div>
 </nav>
 
-<div class="container">
+<div class="container content">
   <div class="row">
     <div class="col-xs-6 col-md-4">
-      <div class="list-group" th:each="dockerRegistry : ${dockerRegistries}">
+      <div class="list-group">
         <a href="#" class="list-group-item disabled">Registry list:</a>
-        <a href="#" class="list-group-item">
-          <span class="badge">${dockerRegistry.imagesCount}</span>
-          <h4 class="list-group-item-heading">${dockerRegistry.name}</h4>
-        </a>
-        <div class="panel-footer">
-          <form class="form-horizontal">
-            <div class="form-group">
-              <label for="newRegistryUrl" class="col-sm-2 control-label">URL:</label>
-              <div class="col-sm-10">
-                <input type="url" class="form-control" id="newRegistryUrl" placeholder="www.example.com:5000">
-              </div>
-            </div>
-            <div class="form-group">
-              <label for="newRegistryDesc" class="col-sm-2 control-label">Password</label>
-              <div class="col-sm-10">
-                <input type="text" class="form-control" id="newRegistryDesc" placeholder="Shot description">
-              </div>
-            </div>
-            <div class="form-group">
-              <div class="col-sm-offset-2 col-sm-10">
-                <button type="submit" class="btn btn-default">Add registry</button>
-              </div>
-            </div>
-          </form>
+        <div th:each="dockerRegistry : ${dockerRegistries}">
+          <a href="#" class="list-group-item">
+            <span class="badge" th:text="${dockerRegistry.imagesCount}"></span>
+            <h4 class="list-group-item-heading" th:text="${dockerRegistry.name}"></h4>
+          </a>
         </div>
+      </div>
+      <div class="panel-footer">
+        <form class="form-horizontal">
+          <div class="form-group">
+            <label for="newRegistryUrl" class="col-sm-2 control-label">URL:</label>
+            <input type="url" class="form-control with-margins" id="newRegistryUrl"
+                   placeholder="www.example.com:5000"/>
+          </div>
+          <div class="form-group">
+            <label for="newRegistryDesc" class="col-sm-2 control-label">Description:</label>
+            <input type="text" class="form-control with-margins" id="newRegistryDesc"
+                   placeholder="Short description"/>
+          </div>
+          <div class="form-group">
+            <button type="submit" class="btn btn-default">Add registry</button>
+          </div>
+        </form>
       </div>
     </div>
 
@@ -101,5 +102,37 @@
     </div>
   </div>
 </div>
+<footer class="footer">
+  <div class="container">
+    <button type="button" class="btn btn-info" data-toggle="modal"
+            data-target="#showModelAttributesModal">Show me model attributes
+    </button>
+    <!-- Modal -->
+    <div id="showModelAttributesModal" class="modal fade" role="dialog">
+      <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <h4 class="modal-title">Current template variables</h4>
+          </div>
+          <div class="modal-body">
+            <table>
+              <tr th:each="var : ${#vars}">
+                <td th:text="${var.key}"></td>
+                <td th:text="${var.value}"></td>
+              </tr>
+            </table>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</footer>
 </body>
 </html>
