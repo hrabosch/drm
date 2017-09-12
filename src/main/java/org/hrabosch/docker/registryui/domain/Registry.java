@@ -19,17 +19,17 @@ public class Registry {
   private Long id;
 
   private String name;
-  private String host;
-  private String port;
-  private String path;
+  private String uri;
+  private String description;
+  private Integer imageCount;
 
   public Registry() {}
 
-  public Registry(String name, String host, String port, String path) {
+  public Registry(String name, String uri, String description) {
     this.name = name;
-    this.host = host;
-    this.port = port;
-    this.path = path;
+    this.uri = uri;
+    this.description = description;
+    this.imageCount = 0;
   }
 
   public Long getId() {
@@ -48,27 +48,27 @@ public class Registry {
     this.name = name;
   }
 
-  public String getHost() {
-    return host;
+  public String getUri() {
+    return uri;
   }
 
-  public void setHost(String host) {
-    this.host = host;
+  public void setUri(String uri) {
+    this.uri = uri;
   }
 
-  public String getPort() {
-    return port;
+  public String getDescription() {
+    return description;
   }
 
-  public void setPort(String port) {
-    this.port = port;
+  public void setDescription(String description) {
+    this.description = description;
   }
 
-  public String getPath() {
-    return path;
+  public Integer getImageCount() {
+    return imageCount;
   }
 
-  public void setPath(String path) {
-    this.path = path;
+  public void setImageCount(Integer imageCount) {
+    this.imageCount = imageCount;
   }
 }

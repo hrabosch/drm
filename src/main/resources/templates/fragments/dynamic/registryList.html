@@ -1,0 +1,56 @@
+<div class="container" th:fragment="registryList">
+  <button type="button" class="btn btn-primary" data-toggle="modal"
+          data-target="#showAddNewRegistryModal">
+    <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+    <div th:text="#{drm.dashboard.registrylist.add}">Add new registry</div>
+  </button>
+  <!-- Modal -->
+  <div id="showAddNewRegistryModal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Add new Docker registry</h4>
+        </div>
+        <div class="modal-body">
+          <form action="#" th:action="@{/registry/addNewRegistry}" th:object="${newRegistry}" method="post">
+            <div class="form-group">
+              <label for="registryLocalName">Registry local name:</label>
+              <input type="text" class="form-control" id="registryLocalName" th:field="*{name}"/>
+            </div>
+            <div class="form-group">
+              <label for="registryUri">Registry url:</label>
+              <input type="text" class="form-control" id="registryUri" th:field="*{uri}"/>
+            </div>
+            <div class="form-group">
+              <label for="registryDesc">Description:</label>
+              <textarea type="text" class="form-control" id="registryDesc" th:field="*{description}"/>
+            </div>
+            <button type="submit" class="btn btn-default">Submit</button>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+<div class="list-group">
+  <a href="#" class="list-group-item disabled" th:text="#{drm.dashboard.registrylist.heading}"></a>
+  <!-- If there are not any registries. -->
+  <div th:if="${#lists.isEmpty(dockerRegistries)}">
+    <a href="#" class="list-group-item">
+      <h4 class="list-group-item-heading" th:text="#{drm.dashboard.registrylist.empty}"></h4>
+    </a>
+  </div>
+  <div th:each="dockerRegistry : ${dockerRegistries}">
+    <a href="#" class="list-group-item">
+      <span class="badge" th:text="${dockerRegistry.imagesCount}"></span>
+      <h4 class="list-group-item-heading" th:text="${dockerRegistry.name}"></h4>
+    </a>
+  </div>
+</div>
+</div>

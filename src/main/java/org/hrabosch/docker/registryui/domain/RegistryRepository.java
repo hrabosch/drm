@@ -12,5 +12,4 @@ public interface RegistryRepository extends CrudRepository<Registry, Long> {
 
   List<Registry> findByName(String name);
 
-  List<Registry> findByHost(String host);
 }
